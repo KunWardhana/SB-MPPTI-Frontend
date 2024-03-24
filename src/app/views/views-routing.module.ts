@@ -17,7 +17,7 @@ const routes: Routes = [
       {
         path: 'sign-in',
         title: 'Sign In',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         loadComponent: () =>
           import('./auth/sign-in/sign-in.component').then(
             (c) => c.SignInComponent
@@ -32,6 +32,7 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'home',
+        pathMatch: 'full',
       },
       {
         path: 'home',
@@ -67,16 +68,16 @@ const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'apps',
-    component: AppLayoutComponent,
-    children: [
-      {
-        path: 'home',
-        title: 'Desa Manud Jaya - Home',
-      },
-    ],
-  },
+  // {
+  //   path: 'apps',
+  //   component: AppLayoutComponent,
+  //   children: [
+  //     {
+  //       path: 'home',
+  //       title: 'Desa Manud Jaya - Home',
+  //     },
+  //   ],
+  // },
 ];
 
 @NgModule({
