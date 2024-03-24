@@ -1,0 +1,28 @@
+<div>
+  <ul>
+    <li>
+      <a routerLink="/apps/home">
+        <div class="flex items-center gap-2">
+          <img
+            ngSrc="assets/icons/home.svg"
+            height="20"
+            width="20"
+            alt="Home"
+            class="w-5 h-5 object-contain"
+          />
+          <p class="text-[#a1a4ab] font-inter text-base">Home</p>
+        </div>
+      </a>
+    </li>
+    <li *ngFor="let link of breadcrumbData; let last = last">
+      <a
+        [routerLink]="link.url"
+        [class.text-ktwo]="last"
+        [class.text-[#a1a4ab]]="!last"
+      >
+        <p class="mx-2 inline-block font-inter text-base">/</p>
+        <p class="inline-block font-inter text-base">{{ link.desc }}</p>
+      </a>
+    </li>
+  </ul>
+</div>

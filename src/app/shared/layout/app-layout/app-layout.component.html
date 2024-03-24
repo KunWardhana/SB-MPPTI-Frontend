@@ -1,0 +1,19 @@
+<app-headbar></app-headbar>
+
+<app-sidebar>
+  <div class="relative z-0">
+    <!-- Background -->
+    <div class="absolute z-10">
+      <img
+        src="assets/images/bo-motif-kotak.svg"
+        height=""
+        alt="Motif Kotak"
+        class="w-full h-fit"
+      />
+    </div>
+    <!-- Content -->
+    <div class="relative z-20">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</app-sidebar>

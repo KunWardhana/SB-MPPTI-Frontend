@@ -1,0 +1,33 @@
+<div *ngIf="isVisible" class="fixed z-50 inset-0 overflow-y-auto" id="modal">
+  <div class="flex items-end justify-center min-h-screen text-center">
+    <!-- Modal BG Overlay -->
+    <div class="fixed inset-0 transition-opacity">
+      <div
+        class="absolute inset-0 bg-[#000] opacity-60"
+        (click)="closeModal()"
+      ></div>
+    </div>
+
+    <!-- Modal Card -->
+    <div
+      class="fixed top-[85px] md:mt-3 md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 p-4 lg:p-8 bg-white rounded-lg text-left overflow-hidden shadow-xl transition-all align-middle z-[100]"
+      [style]="{ width: width }"
+    >
+      <!--Title-->
+      <div class="flex justify-between items-center">
+        <ng-content select="[title]"></ng-content>
+        <!-- Modal Close Button -->
+        <div
+          *ngIf="isDismiss"
+          class="p-1 rounded modal-close cursor-pointer text-2xl hover:bg-neutral-200"
+          (click)="closeModal()"
+        >
+          &#x2715;
+        </div>
+      </div>
+
+      <!-- Content -->
+      <ng-content select="[content]"></ng-content>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "extends": "stylelint-config-standard",
+  "customSyntax": "postcss",
+  "rules": {
+    "color-no-invalid-hex": true,
+    "no-empty-source": null,
+    "no-descending-specificity": null,
+    "import-notation": "string",
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["global", "ng-deep"]
+      }
+    ],
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind",
+          "apply",
+          "variants",
+          "responsive",
+          "screen"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+<!-- Sidebar -->
+<div
+  class="sidebar-app app-scroll"
+  [class.sidebar-app-open]="isOpen"
+  [class.sidebar-app-close]="!isOpen"
+>
+  <!-- Button Open/Close Sidebar -->
+  <div class="sidebar-app-container-close" *ngIf="isOpen && isMobile">
+    <div
+      class="sidebar-app-btn-close sidebar-app-btn-close-grey"
+      (click)="onClickClose()"
+    >
+      <div class="sidebar-app-hamburger"></div>
+      <div class="sidebar-app-hamburger"></div>
+      <div class="sidebar-app-hamburger"></div>
+    </div>
+  </div>
+  <div
+    class="sidebar-app-container-open"
+    (click)="onClickOpen()"
+    *ngIf="!isOpen && isMobile"
+  >
+    <div class="sidebar-app-btn-open sidebar-app-btn-open-grey">&#8942;</div>
+  </div>
+
+  <!-- Submenu -->
+  <div *ngFor="let menu of mandUiMenu; let i = index">
+    <a
+      class="sidebar-app-menu"
+      [routerLink]="menu.path"
+      routerLinkActive="sidebar-app-menu-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img
+        [ngSrc]="menu.logoPath"
+        height="24"
+        width="24"
+        alt="logo"
+        class="sidebar-app-menu-logo"
+      />
+      <p *ngIf="isOpen">
+        {{ menu.desc }}
+      </p>
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar BG Overlay -->
+<div class="sidebar-app-bg-overlay" *ngIf="isOpen && isMobile">
+  <div (click)="onClickClose()"></div>
+</div>
+
+<!-- Content -->
+<div
+  class="sidebar-app-content"
+  [class.sidebar-app-content-desktop]="!isMobile"
+  [class.sidebar-app-content-mobile]="isMobile"
+>
+  <ng-content></ng-content>
+</div>

@@ -1,0 +1,132 @@
+/* The side navigation menu */
+.sidebar-app {
+  margin: 0;
+  padding: 75px 0 100px;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  overflow: auto;
+  border-right: 1px solid #393e46;
+  top: 0;
+  transition: all 0.3s;
+  z-index: 10000 !important;
+  background-color: #393e46;
+  color: #eee;
+
+  &.sidebar-app-open {
+    width: 256px;
+  }
+
+  &.sidebar-app-close {
+    width: 60px;
+  }
+
+  .sidebar-app-container-close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+
+    .sidebar-app-btn-close {
+      cursor: pointer;
+      font-size: 1.5rem;
+      border-radius: 5px;
+      padding: 3px 8px;
+
+      &.sidebar-app-btn-close-grey {
+        &:hover {
+          background-color: #bc293b;
+        }
+
+        .sidebar-app-hamburger {
+          width: 25px;
+          height: 2.5px;
+          background-color: white;
+          margin: 6px 0;
+        }
+      }
+    }
+  }
+
+  .sidebar-app-container-open {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+
+    .sidebar-app-btn-open {
+      cursor: pointer;
+      font-size: 1.5rem;
+      border-radius: 5px;
+      padding: 3px 8px;
+
+      &.sidebar-app-btn-open-grey:hover {
+        background-color: #1e5387;
+      }
+    }
+  }
+
+  .sidebar-app-menu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    height: 56px;
+    line-height: 24px;
+    border-left: 4px solid transparent;
+    margin: auto;
+    gap: 8px;
+    color: #eee;
+    padding: 0 16px;
+    text-decoration: none;
+
+    &.sidebar-app-menu-active {
+      background-color: #bc293b !important;
+      border-left: 4px solid #eee !important;
+    }
+
+    &:hover {
+      background-color: #bc293b;
+    }
+
+    &:hover:not(.sidebar-app-menu-active) {
+      text-decoration: none;
+      background-color: #bc293b;
+    }
+
+    .sidebar-app-menu-logo {
+      width: 24px;
+      height: 24px;
+      object-fit: cover;
+      aspect-ratio: 1;
+    }
+  }
+}
+
+.sidebar-app-content {
+  transition: all 0.3s;
+  margin-top: 88px;
+
+  &.sidebar-app-content-desktop {
+    padding-left: 256px;
+  }
+
+  &.sidebar-app-content-mobile {
+    padding-left: 60px;
+  }
+}
+
+.sidebar-app-bg-overlay {
+  display: block;
+  position: fixed;
+  inset: 0;
+  transition: ease-out;
+  background-color: grey;
+  opacity: 0.5;
+  z-index: 9999 !important;
+
+  div {
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+}

@@ -1,0 +1,111 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Inter;
+  font-weight: 400;
+  src: url('assets/fonts/Inter/inter-regular.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Inter;
+  font-weight: 500;
+  src: url('assets/fonts/Inter/inter-medium.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Inter;
+  font-weight: 600;
+  src: url('assets/fonts/Inter/inter-semibold.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Inter;
+  font-weight: 700;
+  src: url('assets/fonts/Inter/inter-bold.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Inter;
+  font-weight: 800;
+  src: url('assets/fonts/Inter/inter-extrabold.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Inter;
+  font-weight: 900;
+  src: url('assets/fonts/Inter/inter-black.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Merriweather;
+  font-weight: 400;
+  src: url('assets/fonts/Merriweather/Merriweather-Regular.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Merriweather;
+  font-weight: 700;
+  src: url('assets/fonts/Merriweather/Merriweather-Bold.ttf');
+  font-display: swap;
+}
+
+.div-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.div-scroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Firefox */
+input[type='number'] {
+  appearance: textfield;
+}
+
+/* Safari */
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* Autofill Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+/* Scrollbar */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #bc293b #eee;
+}
