@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
   mandUiPathLogo = 'assets/images/cooking.svg';
   mandUiMenu: IMenuModel[] = [
     {
-      desc: 'Home',
+      desc: 'Dashboard',
       logoPath: 'assets/icons/pages.svg',
       path: '/apps/kasir',
       active: false,
