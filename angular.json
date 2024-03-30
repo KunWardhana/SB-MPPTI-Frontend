@@ -31,6 +31,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss",
               "node_modules/ngx-spinner/animations/fire.css"
             ],
@@ -131,6 +132,9 @@
     }
   },
   "cli": {
-    "schematicCollections": ["@angular-eslint/schematics"]
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
+    "analytics": "de65fb06-f87e-44bb-8053-1890f2c66627"
   }
 }

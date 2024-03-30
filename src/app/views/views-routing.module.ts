@@ -68,16 +68,20 @@ const routes: Routes = [
       },
     ],
   },
-  // {
-  //   path: 'apps',
-  //   component: AppLayoutComponent,
-  //   children: [
-  //     {
-  //       path: 'home',
-  //       title: 'Desa Manud Jaya - Home',
-  //     },
-  //   ],
-  // },
+  {
+    path: 'user',
+    children: [
+      {
+        path: 'informasi-desa',
+        title: 'Informasi Desa',
+        // canActivate: [AuthGuard],
+        loadComponent: () =>
+          import('./user/informasi-desa.component').then(
+            (c) => c.InformasiDesaPageComponent
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({
