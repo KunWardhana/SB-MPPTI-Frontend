@@ -37,8 +37,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly router: Router,
-    private readonly authService: AuthService,
-    private readonly auth: AngularFireAuth,
+    // private readonly authService: AuthService,
+    // private readonly auth: AngularFireAuth,
     private readonly spinnerService: NgxSpinnerService,
     private readonly metaService: Meta
   ) {
@@ -58,54 +58,55 @@ export class SignInComponent implements OnInit {
   }
 
   handleLogout() {
-    this.spinnerService.show();
-    if (this.isLoggedIn) {
-      this.authService
-        .signOut()
-        .then(() => {
-          localStorage.clear();
-          this.spinnerService.hide();
-        })
-        .catch(() => {
-          this.isVisible = true;
-          this.spinnerService.hide();
-        });
-    } else {
-      localStorage.clear();
-      this.spinnerService.hide();
-    }
+    localStorage.clear();
+    // this.spinnerService.show();
+    // if (this.isLoggedIn) {
+    //   this.authService
+    //     .signOut()
+    //     .then(() => {
+    //       localStorage.clear();
+    //       this.spinnerService.hide();
+    //     })
+    //     .catch(() => {
+    //       this.isVisible = true;
+    //       this.spinnerService.hide();
+    //     });
+    // } else {
+    //   this.spinnerService.hide();
+    // }
   }
 
   submitForm() {
     const userValid =
       this.signinForm.valid &&
       this.signinForm.controls['username'].value === 'admin';
-    if (userValid) {
-      const email = 'gfe.office365@gmail.com';
-      const password = this.signinForm.controls['password'].value;
-      this.spinnerService.show();
-      this.authService
-        .signIn(email, password)
-        .then((result) => {
-          this.auth.authState.subscribe({
-            next: (user: any) => {
-              this.spinnerService.hide();
-              this.invalidAuth = false;
-              if (user) {
-                this.router.navigate(['/apps/home']);
-              } else {
-                this.isVisible = true;
-              }
-            },
-          });
-        })
-        .catch((error) => {
-          this.spinnerService.hide();
-          this.isVisible = true;
-        });
-    } else {
-      this.invalidAuth = true;
-    }
+
+    this.router.navigate(['/admin/home']);
+    // if (userValid) {
+    //   const email = 'gfe.office365@gmail.com';
+    //   const password = this.signinForm.controls['password'].value;
+    //   this.spinnerService.show();
+    //   this.authService
+    //     .signIn(email, password)
+    //     .then((result) => {
+    //       this.auth.authState.subscribe({
+    //         next: (user: any) => {
+    //           this.spinnerService.hide();
+    //           this.invalidAuth = false;
+    //           if (user) {
+    //           } else {
+    //             this.isVisible = true;
+    //           }
+    //         },
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       this.spinnerService.hide();
+    //       this.isVisible = true;
+    //     });
+    // } else {
+    //   this.invalidAuth = true;
+    // }
   }
 
   onClickTutup() {

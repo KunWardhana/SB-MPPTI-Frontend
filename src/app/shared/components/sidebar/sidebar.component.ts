@@ -36,14 +36,14 @@ export class SidebarComponent implements OnInit {
     {
       desc: 'Dashboard',
       logoPath: 'assets/icons/pages.svg',
-      path: '/apps/kasir',
+      path: '/admin/home',
       active: false,
       submenu: [],
     },
     {
       desc: 'Article',
       logoPath: 'assets/icons/pages.svg',
-      path: '/apps/history',
+      path: '/admin/article',
       active: false,
       submenu: [],
     },
