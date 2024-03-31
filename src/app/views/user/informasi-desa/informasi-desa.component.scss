@@ -1,16 +1,16 @@
 $content-width: 1000px;
 $breakpoint: 799px;
-$body-background: #F3F2EC;
+$body-background: #f3f2ec;
 $nav-height: 70px;
-$nav-background: #A9A9A9;
+$nav-background: #a9a9a9;
 $nav-font-color: #0c0c0c;
-$link-hover-color: #E2CEBC;
+$link-hover-color: #e2cebc;
 $dividerHeight: 70px;
 
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@import 'https://fonts.googleapis.com/css?family=Poppins&display=swap';
 
-body{
-  font-family: 'Poppins';
+body {
+  font-family: Poppins, sans-serif;
   background: $body-background;
 }
 
@@ -31,10 +31,6 @@ body{
   line-height: $nav-height;
   text-transform: uppercase;
   font-size: 1.4em;
-  
-  &:hover{
-    
-  }
 
   a,
   a:visited {
@@ -45,42 +41,47 @@ body{
 
 nav {
   float: right;
+
   ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
     li {
       float: left;
       position: relative;
+
       a {
         display: block;
-        padding: 10px 20px 0 20px;
+        padding: 10px 20px 0;
         line-height: 50px;
         background: $nav-background;
         color: $nav-font-color;
         text-decoration: none;
-        
-        
-         &::before {
-           transition: 300ms;
-           height: 5px;
-           content: "";
-           position: absolute;
-           background-color: $link-hover-color;
-           width: 0%;
-           bottom: 0px;
+
+        &::before {
+          transition: 300ms;
+          height: 5px;
+          content: '';
+          position: absolute;
+          background-color: $link-hover-color;
+          width: 0%;
+          bottom: 0;
         }
 
-        &:hover::before{
+        &:hover::before {
           width: 70%;
         }
-        &:not(:only-child):after {
+
+        &:not(:only-child)::after {
           padding-left: 4px;
           content: ' ▾';
         }
-      } // Dropdown list
+      }
+
       ul li {
         min-width: 190px;
+
         a {
           padding: 15px;
           line-height: 20px;
@@ -90,12 +91,11 @@ nav {
   }
 }
 
-
 .nav-dropdown {
   display: none;
   position: absolute;
   z-index: 1;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 12px rgb(0 0 0 / 15%);
 }
 
 .nav-mobile {
@@ -108,33 +108,37 @@ nav {
   width: $nav-height;
 }
 
-@media only screen and (max-width: $breakpoint) {
+@media only screen and (width <= 799px) {
   .nav-mobile {
     display: block;
   }
+
   nav {
-      width: 100%;
-      padding: $nav-height 0 15px;
+    width: 100%;
+    padding: $nav-height 0 15px;
+
     ul {
       display: none;
-      
-      li{
+
+      li {
         float: none;
-        
+
         a {
           padding: 15px;
           line-height: 20px;
-          
-          &:hover::before{
+
+          &:hover::before {
             width: 20%;
           }
         }
+
         ul li a {
           padding-left: 30px;
         }
       }
     }
   }
+
   .nav-dropdown {
     position: static;
   }
@@ -145,10 +149,11 @@ nav {
   left: 18px;
   top: 22px;
   cursor: pointer;
-  padding: 10px 35px 16px 0px;
+  padding: 10px 35px 16px 0;
+
   span,
-  span:before,
-  span:after {
+  span::before,
+  span::after {
     cursor: pointer;
     border-radius: 1px;
     height: 5px;
@@ -159,28 +164,34 @@ nav {
     content: '';
     transition: all 300ms ease-in-out;
   }
-  span:before {
+
+  span::before {
     top: -10px;
   }
-  span:after {
+
+  span::after {
     bottom: -10px;
   }
+
   &.active span {
     background-color: transparent;
-    &:before,
-    &:after {
+
+    &::before,
+    &::after {
       top: 0;
     }
-    &:before {
+
+    &::before {
       transform: rotate(45deg);
     }
-    &:after {
+
+    &::after {
       transform: rotate(-45deg);
     }
   }
 }
 
-@media screen and (min-width: $breakpoint) {
+@media screen and (width >= 799px) {
   .nav-list {
     display: block !important;
   }
@@ -189,14 +200,14 @@ nav {
 .container {
   text-align: center;
   padding: 3%;
-  max-width: 1200px; 
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .vm-container {
   text-align: center;
   padding: 3%;
-  max-width: 600px; 
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -213,8 +224,8 @@ nav {
 
 .divider {
   height: $dividerHeight;
-  background-color: #A9A9A9; // Example color, you can change as needed
-  width: 100%; // Assuming full width, adjust as needed
+  background-color: #a9a9a9;
+  width: 100%;
 }
 
 .image-swipe-container {
@@ -236,31 +247,31 @@ nav {
 }
 
 .footer {
-  background-color: #A9A9A9;
+  background-color: #a9a9a9;
   color: #0c0c0c;
   padding: 50px 0;
-  
+
   .container {
     display: flex;
     justify-content: space-between;
   }
-  
+
   .left-container {
     flex: 1;
-    
+
     .contact-form {
       h3 {
         font-size: 20px;
       }
-      
+
       p {
         margin-bottom: 20px;
       }
-      
+
       form {
         display: flex;
         flex-direction: column;
-        
+
         input,
         textarea {
           margin-bottom: 15px;
@@ -269,7 +280,7 @@ nav {
           border: none;
           border-radius: 5px;
         }
-        
+
         button {
           padding: 10px 20px;
           background-color: #0c0c0c;
@@ -281,7 +292,7 @@ nav {
       }
     }
   }
-  
+
   .right-container {
     flex: 1;
     background-color: #0c0c0c;
@@ -290,19 +301,18 @@ nav {
     margin-left: 80px;
     color: #fff;
     text-align: left;
-    
-    .contact-info {
 
+    .contact-info {
       h3 {
         margin-top: 24px;
         font-size: 20px;
       }
-      
+
       ul {
         margin-top: 18px;
         list-style: none;
         padding: 0;
-        
+
         li {
           margin-top: 12px;
           margin-bottom: 10px;

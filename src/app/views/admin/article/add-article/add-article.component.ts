@@ -10,11 +10,18 @@ import {
 import { Router } from '@angular/router';
 import { NUMBER } from '@app/core/constants/general.constant';
 import { ModalComponent } from '@app/shared/components/modal/modal.component';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-add-article',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ModalComponent,
+    QuillModule,
+  ],
   templateUrl: './add-article.component.html',
   styles: [],
 })
@@ -55,7 +62,6 @@ export class AddArticleComponent implements OnInit {
 
     this.articleForm = this.fb.group({
       title: ['', [Validators.required]],
-      images: [''],
       articleBody: ['', [Validators.required]],
     });
 
@@ -71,7 +77,7 @@ export class AddArticleComponent implements OnInit {
   }
 
   checkPath() {
-    if (this.pathMonitoring === 'add-article') {
+    if (this.pathMonitoring === 'add') {
       this.isAdd = true;
       this.title = 'Add Article';
       this.popupSuccess = {
@@ -82,13 +88,13 @@ export class AddArticleComponent implements OnInit {
       return true;
     } else {
       if (!this.state && !this.state.id) {
-        this.router.navigateByUrl(this.url + '/list-article');
+        this.router.navigateByUrl(this.url + '/');
         return false;
       }
 
       this.fetchDetail();
 
-      if (this.pathMonitoring === 'edit-article') {
+      if (this.pathMonitoring === 'edit') {
         this.isDetail = true;
         this.title = 'Edit Article';
         this.popupSuccess = {

@@ -13,7 +13,7 @@ module.exports = {
       colors: {
         kone: '#222831',
         ktwo: '#393E46',
-        kthree: '#bc293b',
+        kthree: '#000',
         kfour: '#eeeeee',
       },
     },

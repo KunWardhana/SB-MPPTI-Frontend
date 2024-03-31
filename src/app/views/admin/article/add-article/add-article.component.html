@@ -21,7 +21,7 @@
                 class="relative h-[80%] w-full px-4 py-3 bg-transparent border-none outline-none pointer focus:ring-0 peer font-bold"
               />
               <label
-                class="text-sm pointer-events-none text-[#2D2D2D] -z-10 absolute left-[16px] bottom-4 peer-focus:bottom-8 peer-focus:text-xs peer-valid:top-2 peer-valid:text-xs peer-valid:text-[#2D2D2D] transition-all duration-300"
+                class="text-sm pointer-events-none text-[#2D2D2D] z-10 absolute left-[20px] bottom-4 peer-focus:bottom-8 peer-focus:text-xs peer-valid:top-2 peer-valid:text-xs peer-valid:text-[#2D2D2D] transition-all duration-300"
                 [ngClass]="
                   articleForm.controls['title'].value
                     ? 'top-2 text-xs text-[#2D2D2D]'
@@ -40,6 +40,25 @@
               *Field ini harus diisi
             </div>
           </div>
+          <div>
+            <div class="relative rounded-xl flex items-end justify-center">
+              <quill-editor
+                placeholder="Content"
+                formControlName="articleBody"
+                [disabled]="isReview"
+              ></quill-editor>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="relative text-xs font-normal text-red-700"
+          *ngIf="
+            articleForm.controls['articleBody'].hasError('required') &&
+            articleForm.controls['articleBody'].touched
+          "
+        >
+          *Field ini harus diisi
         </div>
       </form>
 

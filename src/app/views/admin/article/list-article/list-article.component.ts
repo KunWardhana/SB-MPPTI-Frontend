@@ -252,7 +252,8 @@ export class ListArticleComponent implements OnInit {
 
   clickAddArticle() {
     const url = this.router.url.split('/').slice(0, 3).join('/');
-    this.router.navigateByUrl(url + '/add-article');
+    console.log(url + '/add');
+    this.router.navigateByUrl(url + '/add');
   }
 
   handleSort(type: string) {

@@ -6,12 +6,12 @@
   display: block;
   position: fixed;
   overflow: auto;
-  border-right: 1px solid #393e46;
+  border-right: 1px solid #dbdbdb;
   top: 0;
   transition: all 0.3s;
   z-index: 10000 !important;
-  background-color: #393e46;
-  color: #eee;
+  background-color: #fff;
+  color: #12084c;
 
   &.sidebar-app-open {
     width: 256px;
@@ -75,22 +75,22 @@
     border-left: 4px solid transparent;
     margin: auto;
     gap: 8px;
-    color: #eee;
+    color: #12084c;
     padding: 0 16px;
     text-decoration: none;
 
     &.sidebar-app-menu-active {
-      background-color: #bc293b !important;
-      border-left: 4px solid #eee !important;
+      background-color: #0b77db1a !important;
+      border-left: 4px solid #0b77db1a !important;
     }
 
     &:hover {
-      background-color: #bc293b;
+      background-color: #0b77db1a;
     }
 
     &:hover:not(.sidebar-app-menu-active) {
       text-decoration: none;
-      background-color: #bc293b;
+      background-color: #0b77db1a;
     }
 
     .sidebar-app-menu-logo {

@@ -7,13 +7,18 @@ import { AuthGuard } from '../core/guard/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth/sign-in',
+    redirectTo: 'user/informasi-desa',
     pathMatch: 'full',
   },
   {
     path: 'auth',
     component: AuthLayoutComponent,
     children: [
+      {
+        path: '',
+        redirectTo: 'sign-in',
+        pathMatch: 'full',
+      },
       {
         path: 'sign-in',
         title: 'Sign In',
@@ -72,11 +77,16 @@ const routes: Routes = [
     path: 'user',
     children: [
       {
+        path: '',
+        redirectTo: 'informasi-desa',
+        pathMatch: 'full',
+      },
+      {
         path: 'informasi-desa',
         title: 'Informasi Desa',
         // canActivate: [AuthGuard],
         loadComponent: () =>
-          import('./user/informasi-desa.component').then(
+          import('./user/informasi-desa/informasi-desa.component').then(
             (c) => c.InformasiDesaPageComponent
           ),
       },

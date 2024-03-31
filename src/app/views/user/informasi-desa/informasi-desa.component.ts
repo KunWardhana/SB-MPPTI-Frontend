@@ -8,12 +8,17 @@ import { CarousellComponent } from '@app/carousell/carousell.component';
 @Component({
   selector: 'app-informasi-desa-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgOptimizedImage, AlbumComponent, CarousellComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NgOptimizedImage,
+    AlbumComponent,
+    CarousellComponent,
+  ],
   templateUrl: './informasi-desa.component.html',
   styleUrls: ['./informasi-desa.component.scss'],
 })
 export class InformasiDesaPageComponent implements OnInit {
-  
   linkHover = false;
 
   constructor(private readonly metaService: Meta) {}
