@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
-import { AlbumComponent } from '@app/album/album.component';
-import { CarousellComponent } from '@app/carousell/carousell.component';
+import { AlbumComponent } from '@app/shared/components/album/album.component';
+import { CarousellComponent } from '@app/shared/components/carousell/carousell.component';
 
 @Component({
   selector: 'app-informasi-desa-page',
