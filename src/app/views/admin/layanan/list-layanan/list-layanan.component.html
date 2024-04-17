@@ -1,0 +1,260 @@
+<div class="relative z-0 px-14">
+  <!-- Background -->
+  <div class="absolute -z-10">
+    <img src="assets/images/bo-motif-kotak.svg" alt="Motif Kotak" />
+  </div>
+  <!-- Title & Search -->
+  <div class="relative flex justify-between z-20 py-[30px]">
+    <div>
+      <p class="font-inter font-bold text-[#2D2D2D] text-2xl">Layanan</p>
+      <p class="text-sm text-[#333] font-[400]">
+        Create, edit and manage service.
+      </p>
+    </div>
+    <div class="relative z-0">
+      <img
+        src="assets/icons/search-gray.svg"
+        alt="Search"
+        class="absolute top-[10px] left-3 z-20 hover:cursor-pointer"
+      />
+      <form [formGroup]="searchForm">
+        <input
+          class="rounded-full border border-solid border-[#D4D4D4] bg-[#F7F6F6] pr-3 pl-11 py-[10px] focus:ring-black-600 focus:border-black-600 text-[#3C3C3C]"
+          type="text"
+          placeholder="Cari Layanan"
+          formControlName="textSearch"
+          (keyup)="onKeyupSearch($event)"
+        />
+      </form>
+    </div>
+  </div>
+  <!-- Add & Page Size -->
+  <div class="relative flex justify-between z-40 pb-[35px]">
+    <div>
+      <button
+        class="bg-[#000000] text-white rounded-xl px-4 py-2 hover:opacity-80"
+        (click)="clickAddArticle()"
+      >
+        <div class="flex items-center justify-center gap-1">
+          <img src="assets/icons/plus-white.svg" alt="Add" />
+          <p>Add Article</p>
+        </div>
+      </button>
+    </div>
+    <div class="flex items-center justify-center gap-2">
+      <p class="font-bold text-[#686868] text-sm">Row per page</p>
+      <div class="relative">
+        <div class="flex items-center">
+          <div
+            class="w-[44px] h-[32px] relative rounded-tl-[4px] rounded-bl-[4px] border-t border-l border-b border-solid border-[#000]"
+          >
+            <p
+              class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 font-normal text-[#333] text-sm"
+            >
+              {{ pageSize }}
+            </p>
+          </div>
+          <div
+            class="w-[32px] h-[32px] bg-[#000] relative hover:cursor-pointer rounded-tr-[4px] rounded-br-[4px] border border-solid border-[#000]"
+            (click)="pageSizeDropdown = !pageSizeDropdown"
+          >
+            <img
+              class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[10px] h-[12px]"
+              style="
+                filter: invert(100%) sepia(0%) saturate(12%) hue-rotate(250deg)
+                  brightness(103%) contrast(104%);
+              "
+              src="assets/icons/chevron-down.svg"
+              alt="Chevron"
+            />
+          </div>
+        </div>
+        <div
+          class="absolute top-[40px] left-0 bg-[#F7F6F6] rounded-[4px]"
+          *ngIf="pageSizeDropdown"
+        >
+          <div
+            class="w-[44px] text-center hover:cursor-pointer hover:bg-[#D4D4D4] first:rounded-tl-[4px] first:rounded-tr-[4px] last:rounded-bl-[4px] last:rounded-br-[4px]"
+            *ngFor="let el of pageSizeArray"
+            (click)="clickPageSizeDropdown(el)"
+          >
+            {{ el }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Table -->
+  <div
+    class="relative z-20 overflow-x-hidden overflow-y-auto max-h-[600px] div-scroll"
+  >
+    <table class="w-full text-left table-auto" style="display: table">
+      <thead class="!bg-[#686868] !font-bold !text-white !text-sm">
+        <th
+          class="p-4 first:rounded-tl-lg last:rounded-tr-lg"
+          *ngFor="let el of tableHeaderArray"
+        >
+          <div class="flex items-center gap-2">
+            <p>{{ el }}</p>
+            <button
+              *ngIf="el === 'Status'"
+              [ngClass]="
+                isStatusSort
+                  ? 'rotate-0 origin-center transform transition ease-in-out'
+                  : 'rotate-180 origin-center transform transition ease-in-out'
+              "
+              (click)="handleSort(el)"
+            >
+              <img
+                src="assets/icons/arrow-up-white.svg"
+                class="w-[10px] h-[10px]"
+                style="
+                  filter: invert(100%) sepia(0%) saturate(12%)
+                    hue-rotate(250deg) brightness(103%) contrast(104%);
+                "
+              />
+            </button>
+            <button
+              *ngIf="el === 'Title'"
+              [ngClass]="
+                isTitleSort
+                  ? 'rotate-0 origin-center transform transition ease-in-out'
+                  : 'rotate-180 origin-center transform transition ease-in-out'
+              "
+              (click)="handleSort(el)"
+            >
+              <img
+                src="assets/icons/arrow-up-white.svg"
+                class="w-[10px] h-[10px]"
+                style="
+                  filter: invert(100%) sepia(0%) saturate(12%)
+                    hue-rotate(250deg) brightness(103%) contrast(104%);
+                "
+              />
+            </button>
+          </div>
+        </th>
+      </thead>
+      <tbody class="font-normal text-sm text-[#494949]">
+        <tr
+          class="odd:bg-white even:bg-[#F7F6F6]"
+          *ngFor="let data of tableDataArray"
+        >
+          <td class="p-4 w-[25%] break-all">{{ data.title }}</td>
+          <td class="p-4 w-[10%] break-all">
+            {{ data.status }}
+          </td>
+          <td class="p-4 w-[10%] break-all">
+            {{ data.author }}
+          </td>
+          <td class="p-4 w-[15%] break-all">
+            {{ data.createdDate | date: 'd MMM YYYY, HH:mm' }}
+          </td>
+          <td class="p-4 w-[15%] break-all">
+            {{ data.updatedDate | date: 'd MMM YYYY, HH:mm' }}
+          </td>
+          <td class="p-4 w-[25%] break-all">
+            <div class="flex items-center justify-start gap-2 flex-wrap">
+              <button
+                class="px-3 py-2 bg-black-600 rounded-[10px] hover:opacity-80"
+                (click)="onClickDetail(data.id, 'edit')"
+              >
+                <div class="flex items-center justify-start gap-1">
+                  <img src="assets/icons/pencil-white.svg" alt="Pencil" />
+                  <p class="font-bold text-white text-xs">Edit</p>
+                </div>
+              </button>
+              <button
+                (click)="onClickDelete(data.id, 'delete')"
+                class="px-3 py-1 bg-white rounded-[10px] border border-solid border-[#000] hover:bg-[#000]/[10%]"
+              >
+                <div class="flex items-center justify-start gap-1">
+                  <img
+                    src="assets/icons/trash-black.svg"
+                    alt="Trash"
+                    style="filter: brightness(0) saturate(100%)"
+                  />
+                  <p class="font-bold text-[#000] text-xs">Delete</p>
+                </div>
+              </button>
+              <button
+                *ngIf="data.status === 'DRAFTED'"
+                (click)="onClickDetail(data.id, 'review')"
+                class="px-3 py-2 bg-white rounded-[10px] border border-solid border-[#000] hover:bg-[#000]/[10%]"
+              >
+                <div class="flex items-center justify-start gap-1">
+                  <img
+                    src="assets/icons/pencil-white.svg"
+                    alt="Pencil"
+                    style="filter: brightness(0) saturate(100%)"
+                  />
+                  <p class="font-bold text-[#000] text-xs">Review</p>
+                </div>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Pagination -->
+  <div
+    class="relative flex justify-between z-20 py-[24px] my-[24px] border-t border-solid border-[#EDEDED]"
+  >
+    <p class="font-normal text-sm text-[#4F4F4F]">
+      Showing {{ startItem }} - {{ endItem }} of {{ totalItems }} entries
+    </p>
+    <div class="flex items-center justify-center gap-2">
+      <button
+        class="px-6 py-3 border boder-solid border-[#000] rounded-xl text-[#000] text-sm font-bold hover:bg-[#000] hover:text-white"
+        (click)="clickPreviousPage()"
+        *ngIf="currentPage > 1"
+      >
+        Previous
+      </button>
+      <button
+        class="px-6 py-3 border boder-solid border-[#000] rounded-xl text-[#000] text-sm font-bold hover:bg-[#000] hover:text-white"
+        *ngFor="let page of pageArray"
+        (click)="clickNumberButton(page)"
+        [class.bg-[#000]]="page === currentPage"
+        [class.text-[#fff]]="page === currentPage"
+      >
+        {{ page }}
+      </button>
+      <button
+        class="px-6 py-3 border boder-solid border-[#000] rounded-xl text-[#000] text-sm font-bold hover:bg-[#000] hover:text-white"
+        (click)="clickNextPage()"
+        *ngIf="currentPage < totalPages"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-modal
+  [isVisible]="isVisible"
+  (modalData)="onClickModalClose($event)"
+  [width]="'470px'"
+  [isDismiss]="false"
+  ><div title class="font-bold text-[#000] text-2xl">
+    {{ modalData?.title }}
+  </div>
+  <div content>
+    <p>{{ modalData?.desc }}</p>
+    <div class="flex justify-end gap-4 mt-10">
+      <button
+        (click)="this.isVisible = false"
+        class="py-3 px-5 border boder-solid border-[#000] rounded-xl text-black-600 font-bold text-base hover:bg-[#000]/[10%]"
+      >
+        Batal
+      </button>
+      <button
+        (click)="onClickDeleteConfirm()"
+        class="py-3 px-5 border boder-solid border-[#000] bg-[#000] rounded-xl text-white font-bold text-base hover:bg-opacity-80"
+      >
+        Lanjutkan
+      </button>
+    </div>
+  </div>
+</app-modal>

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   ActivatedRouteSnapshot,
-  CanActivate,
   Router,
   RouterStateSnapshot,
   UrlTree,
@@ -12,13 +10,10 @@ import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard {
   private readonly excludeUrls: string[] = ['/auth/sign-in'];
 
-  constructor(
-    private readonly router: Router,
-    private readonly auth: AngularFireAuth
-  ) {}
+  constructor(private readonly router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -36,14 +31,7 @@ export class AuthGuard implements CanActivate {
       return this.handleUnauthenticated();
     }
 
-    return this.auth.authState.pipe(
-      map((user) => {
-        if (!user) {
-          return this.handleUnauthenticated();
-        }
-        return true;
-      })
-    );
+    return true;
   }
 
   private shouldExcludeUrl(url: string): boolean {
@@ -51,7 +39,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private isLoggedIn(): boolean {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    return !!window.localStorage.getItem('token');
   }
 
   private handleUnauthenticated(): boolean {

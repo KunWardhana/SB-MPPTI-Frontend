@@ -1,0 +1,166 @@
+<h1 class="font-inter text-[24px] font-bold mx-14 mt-10">
+  {{ title }}
+</h1>
+<div class="flex items-start justify-between gap-10 mx-14 my-10">
+  <div class="w-[700px]">
+    <div class="flex flex-col gap-[24px]">
+      <form
+        [formGroup]="articleForm"
+        (ngSubmit)="onClickSubmit()"
+        id="articleForm"
+      >
+        <div class="flex flex-col gap-[24px]">
+          <div>
+            <div
+              class="relative h-14 bg-gray-100 rounded-xl flex items-end justify-center border border-solid border-[#D4D4D4] focus-within:border-[#000]"
+            >
+              <input
+                type="text"
+                formControlName="title"
+                required
+                class="relative h-[80%] w-full px-4 py-3 bg-transparent border-none outline-none pointer focus:ring-0 peer font-bold"
+              />
+              <label
+                class="text-sm pointer-events-none text-[#2D2D2D] z-10 absolute left-[20px] bottom-4 peer-focus:bottom-8 peer-focus:text-xs peer-valid:top-2 peer-valid:text-xs peer-valid:text-[#2D2D2D] transition-all duration-300"
+                [ngClass]="
+                  articleForm.controls['title'].value
+                    ? 'top-2 text-xs text-[#2D2D2D]'
+                    : null
+                "
+                >Title</label
+              >
+            </div>
+            <div
+              class="relative text-xs font-normal text-red-700"
+              *ngIf="
+                articleForm.controls['title'].hasError('required') &&
+                articleForm.controls['title'].touched
+              "
+            >
+              *Field ini harus diisi
+            </div>
+          </div>
+          <div>
+            <div class="relative rounded-xl flex items-end justify-center">
+              <quill-editor
+                placeholder="Content"
+                formControlName="articleBody"
+                [disabled]="isReview"
+              ></quill-editor>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="relative text-xs font-normal text-red-700"
+          *ngIf="
+            articleForm.controls['articleBody'].hasError('required') &&
+            articleForm.controls['articleBody'].touched
+          "
+        >
+          *Field ini harus diisi
+        </div>
+      </form>
+
+      <hr class="mt-[36px] mb-[24px]" />
+
+      <div class="flex justify-between">
+        <div>
+          <button
+            *ngIf="isDetail"
+            (click)="onClickDelete()"
+            type="button"
+            class="justify-center inline-flex items-center w-[120px] h-[52px] font-[700] text-[#000] hover:bg-[#000]/[20%] hover:text-[#000]/[90%] font-inter rounded-[12px] text-[16px] px-5 py-2.5 mr-2 mb-2 focus:outline-none gap-2"
+          >
+            <img
+              src="assets/icons/trash-white.svg"
+              class="w-[16px] h-[16px]"
+              alt="trash"
+              style="filter: brightness(0) saturate(100%)"
+            />
+            <p>Delete</p>
+          </button>
+        </div>
+
+        <div>
+          <button
+            (click)="onClickCancel()"
+            type="button"
+            class="justify-center inline-flex items-center w-[120px] h-[52px] font-[700] text-[#000] hover:bg-[#000]/[20%] hover:text-[#000]/[90%] font-inter rounded-[12px] text-[16px] px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+          >
+            Cancel
+          </button>
+
+          <button
+            *ngIf="!isReview"
+            type="submit"
+            form="articleForm"
+            [disabled]="articleForm.invalid"
+            class="justify-center inline-flex items-center w-[120px] h-[52px] font-[700] text-[#FFFFFF] bg-[#000] hover:bg-[#000]/[80%] disabled:bg-[#000]/[80%] disabled:cursor-not-allowed hover:text-[#FFFFFF] font-inter rounded-[12px] text-[16px] px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+          >
+            Publish
+          </button>
+          <button
+            *ngIf="isReview"
+            type="button"
+            (click)="onClickReview('reject')"
+            class="justify-center inline-flex items-center w-[120px] h-[52px] font-[700] text-[#FFFFFF] bg-[#000] hover:bg-[#000]/[80%] disabled:bg-[#000]/[80%] disabled:cursor-not-allowed hover:text-[#FFFFFF] font-inter rounded-[12px] text-[16px] px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+          >
+            Reject
+          </button>
+          <button
+            *ngIf="isReview"
+            type="button"
+            (click)="onClickReview('approve')"
+            class="justify-center inline-flex items-center w-[120px] h-[52px] font-[700] text-[#FFFFFF] bg-[#000] hover:bg-[#000]/[80%] disabled:bg-[#000]/[80%] disabled:cursor-not-allowed hover:text-[#FFFFFF] font-inter rounded-[12px] text-[16px] px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+          >
+            Approve
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-[364px] py-8 px-6 bg-[#F7F8F9] rounded-3xl" *ngIf="!isAdd">
+    <h4 class="font-inter text-2xl text-[#121518] font-bold mb-6">Author</h4>
+    <div class="flex items-center justify-start gap-4">
+      <img
+        [src]="
+          this.detailData?.publishedBy?.profilePicture ??
+          'assets/icons/user-placeholder.svg'
+        "
+        alt="Photo"
+        class="rounded-full w-16 h-16"
+      />
+      <p class="text-base font-bold text-[#121518]">
+        {{ this.detailData?.publishedBy?.fullname ?? '' }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<app-modal
+  [isVisible]="isVisible"
+  (modalData)="onClickModalClose($event)"
+  [width]="'470px'"
+  [isDismiss]="false"
+  ><div title class="font-bold text-[#000] text-2xl">
+    {{ modalData?.title }}
+  </div>
+  <div content>
+    <p>{{ modalData?.desc }}</p>
+    <div class="flex justify-end gap-4 mt-10">
+      <button
+        (click)="this.isVisible = false"
+        class="py-3 px-5 border boder-solid border-[#000] rounded-xl text-black-600 font-bold text-base hover:bg-[#000]/[10%]"
+      >
+        Batal
+      </button>
+      <button
+        (click)="onClickModalConfirm(modalData?.type)"
+        class="py-3 px-5 border boder-solid border-[#000] bg-[#000] rounded-xl text-white font-bold text-base hover:bg-opacity-80"
+      >
+        Lanjutkan
+      </button>
+    </div>
+  </div></app-modal
+>

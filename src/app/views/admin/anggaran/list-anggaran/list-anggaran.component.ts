@@ -7,13 +7,13 @@ import { NUMBER } from '@app/core/constants/general.constant';
 import { ModalComponent } from '@app/shared/components/modal/modal.component';
 
 @Component({
-  selector: 'app-list-article',
-  templateUrl: './list-article.component.html',
+  selector: 'app-list-layanan',
+  templateUrl: './list-anggaran.component.html',
   styleUrls: [],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ModalComponent],
 })
-export class ListArticleComponent implements OnInit {
+export class ListAnggaranComponent implements OnInit {
   // articleID
   articleId: string = '';
 
@@ -43,7 +43,7 @@ export class ListArticleComponent implements OnInit {
   endPage: number = 0;
 
   // Table Props
-  tableHeaderArray = ['Title', 'Action'];
+  tableHeaderArray = ['Title', 'Deskripsi', 'Action'];
   tableDataArray: any[] = [];
   tableDataSource: any[] = [];
 

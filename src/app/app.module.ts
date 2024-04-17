@@ -11,7 +11,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
 
 const modules = {
   toolbar: [
@@ -56,7 +57,14 @@ const modules = {
     }),
     AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [Meta],
+  providers: [
+    Meta,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

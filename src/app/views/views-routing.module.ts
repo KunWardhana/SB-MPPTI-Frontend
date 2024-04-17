@@ -42,7 +42,7 @@ const routes: Routes = [
       {
         path: 'home',
         title: 'Desa Manud Jaya - Home',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadComponent: () =>
           import('./admin/landing-page/landing-page.component').then(
             (c) => c.LandingPageComponent
@@ -54,7 +54,7 @@ const routes: Routes = [
           {
             path: '',
             title: 'Desa Manud Jaya - Article',
-            // canActivate: [AuthGuard],
+            canActivate: [AuthGuard],
             loadComponent: () =>
               import(
                 './admin/article/list-article/list-article.component'
@@ -63,10 +63,56 @@ const routes: Routes = [
           {
             path: 'add',
             title: 'Desa Manud Jaya - Add Article',
-            // canActivate: [AuthGuard],
+            canActivate: [AuthGuard],
             loadComponent: () =>
               import('./admin/article/add-article/add-article.component').then(
                 (c) => c.AddArticleComponent
+              ),
+          },
+        ],
+      },
+      {
+        path: 'anggaran',
+        children: [
+          {
+            path: '',
+            title: 'Desa Manud Jaya - Anggaran',
+            canActivate: [AuthGuard],
+            loadComponent: () =>
+              import(
+                './admin/anggaran/list-anggaran/list-anggaran.component'
+              ).then((c) => c.ListAnggaranComponent),
+          },
+          {
+            path: 'add',
+            title: 'Desa Manud Jaya - Add Anggaran',
+            canActivate: [AuthGuard],
+            loadComponent: () =>
+              import(
+                './admin/anggaran/add-anggaran/add-anggaran.component'
+              ).then((c) => c.AddAnggaranComponent),
+          },
+        ],
+      },
+      {
+        path: 'layanan',
+        children: [
+          {
+            path: '',
+            title: 'Desa Manud Jaya - Layanan',
+            // canActivate: [AuthGuard],
+            loadComponent: () =>
+              import(
+                './admin/layanan/list-layanan/list-layanan.component'
+              ).then((c) => c.ListLayananComponent),
+          },
+          {
+            path: 'add',
+            title: 'Desa Manud Jaya - Add Layanan',
+            // canActivate: [AuthGuard],
+            loadComponent: () =>
+              import('./admin/layanan/add-layanan/add-layanan.component').then(
+                (c) => c.AddLayananComponent
               ),
           },
         ],

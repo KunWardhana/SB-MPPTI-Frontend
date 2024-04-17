@@ -7,13 +7,13 @@ import { NUMBER } from '@app/core/constants/general.constant';
 import { ModalComponent } from '@app/shared/components/modal/modal.component';
 
 @Component({
-  selector: 'app-list-article',
-  templateUrl: './list-article.component.html',
+  selector: 'app-list-layanan',
+  templateUrl: './list-layanan.component.html',
   styleUrls: [],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ModalComponent],
 })
-export class ListArticleComponent implements OnInit {
+export class ListLayananComponent implements OnInit {
   // articleID
   articleId: string = '';
 

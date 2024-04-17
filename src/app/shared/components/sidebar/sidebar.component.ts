@@ -47,6 +47,20 @@ export class SidebarComponent implements OnInit {
       active: false,
       submenu: [],
     },
+    {
+      desc: 'Layanan',
+      logoPath: 'assets/icons/pages.svg',
+      path: '/admin/layanan',
+      active: false,
+      submenu: [],
+    },
+    {
+      desc: 'Anggaran',
+      logoPath: 'assets/icons/pages.svg',
+      path: '/admin/anggaran',
+      active: false,
+      submenu: [],
+    },
   ];
 
   @HostListener('window:resize', ['$event'])
