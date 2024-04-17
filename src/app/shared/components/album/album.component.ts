@@ -2,12 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-carousell',
+  selector: 'app-album',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './carousell.component.html',
-  styleUrls: ['./carousell.component.scss']
+  templateUrl: './album.component.html',
+  styleUrls: ['./album.component.scss'],
 })
-export class CarousellComponent {
-
-}
+export class AlbumComponent {}
