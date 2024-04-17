@@ -11,6 +11,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill';
+import { HttpClientModule } from '@angular/common/http';
 
 const modules = {
   toolbar: [
@@ -42,6 +43,7 @@ const modules = {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     NgxSpinnerModule,
     QuillModule.forRoot({
       modules: modules,
@@ -52,9 +54,7 @@ const modules = {
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    // AngularFireModule.initializeApp(environment.firebase),
-    // AngularFireDatabaseModule,
-    // AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [Meta],
   bootstrap: [AppComponent],

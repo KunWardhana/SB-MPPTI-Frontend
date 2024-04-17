@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,30 +8,17 @@ import { Router } from '@angular/router';
 export class AuthService {
   userData: any;
 
-  constructor(private readonly auth: AngularFireAuth) {
-    this.auth.authState.subscribe((user) => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        localStorage.setItem('isLoggedIn', 'true');
-        JSON.parse(localStorage.getItem('user')!);
-        JSON.parse(localStorage.getItem('isLoggedIn')!);
-      } else {
-        localStorage.setItem('user', 'null');
-        localStorage.setItem('isLoggedIn', 'null');
-        JSON.parse(localStorage.getItem('user')!);
-        JSON.parse(localStorage.getItem('isLoggedIn')!);
-      }
-    });
-  }
+  constructor(private readonly httpClient: HttpClient) {}
 
   // Sign in with email/password
   signIn(email: string, password: string) {
-    return this.auth.signInWithEmailAndPassword(email, password);
+    const url = `${environment.backendUrl}login`;
+    return this.httpClient.post(url, {
+      email,
+      password,
+    });
   }
 
   // Sign out
-  signOut() {
-    return this.auth.signOut();
-  }
+  signOut() {}
 }

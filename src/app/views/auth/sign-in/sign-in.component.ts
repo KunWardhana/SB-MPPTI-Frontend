@@ -37,7 +37,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly router: Router,
-    // private readonly authService: AuthService,
+    private readonly authService: AuthService,
     // private readonly auth: AngularFireAuth,
     private readonly spinnerService: NgxSpinnerService,
     private readonly metaService: Meta
@@ -80,6 +80,19 @@ export class SignInComponent implements OnInit {
     const userValid =
       this.signinForm.valid &&
       this.signinForm.controls['username'].value === 'admin';
+
+    if (userValid) {
+      const email = 'admin@gmail.com';
+      const password = this.signinForm.controls['password'].value;
+      this.authService.signIn(email, password).subscribe({
+        next: (value) => {
+          this.spinnerService.hide();
+          this.invalidAuth = false;
+          console.log('login');
+          console.log(value);
+        },
+      });
+    }
 
     this.router.navigate(['/admin/home']);
     // if (userValid) {
